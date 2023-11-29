@@ -19,13 +19,16 @@ disasters_df.dropna(how='any', subset=['Latitude', 'Longitude'], inplace=True)
 
 points = disasters_df[['Latitude', 'Longitude']].to_numpy()
 
-clustering = DBSCAN(eps=3, min_samples=2, metric=distance_between_points).fit(points)
-num_clusters = len(set(clustering.labels_))
-clusters = pd.Series(points[clustering.labels_ == n] for n in range(num_clusters))
+model = DBSCAN(eps=3, min_samples=2, metric=distance_between_points)
+data = model.fit(points)
 
-print(clusters.head())
+clusters = data.fit_predict(points)
+clust_df = pd.DataFrame(points)
 
-print(f'Number of Clusters: {num_clusters}')
+clusters = (clust_df[data.labels_ != -1])
+colour_clusters = data.fit_predict(clusters)
+
+
 
 
 # sum of deaths per year
@@ -56,7 +59,7 @@ average_deaths_df['CumDeaths'] = average_deaths_df['CumDeaths'].map(disasters_df
 # plt.legend()
 # plt.grid(True)
 
-# visualising clusters
-color_list = np.array(['green', 'blue', 'red', 'yellow',  'orange',  'magenta', 'cyan', 'purple'])
-
-plt.show()
+plt.scatter(clusters[0], clusters[1], c=colour_clusters, cmap='inferno')
+plt.colorbar()
+plt.title("Clusters: " + str(len(set(data.labels_))), fontsize = 13)
+plt.show() 

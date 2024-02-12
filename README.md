@@ -1,5 +1,5 @@
-# temps_and_disasters
-ECM3420 Coursework analysing the distribution between earth surface temperatures and global disasters and looking at predicting the frequency of disasters based on location
+# Earth Temperatures and Natural Disasters
+Analysing the distribution between earth surface temperatures and global natural disasters.
 
 ### Datasets
 Links to datasets used:

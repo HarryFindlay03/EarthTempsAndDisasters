@@ -1,4 +1,7 @@
 .DS_Store
 /env
 /datasets
+/images
+*.png
+Executive Report.md
 /__pycache__
